@@ -1,7 +1,8 @@
-﻿using System;
-using System.Net.Http;
+﻿using Auth;
+using Auth.Interfaces;
+using Policies;
 
-namespace Net.Extensions.Http.RestClient.Extensions
+namespace Net.Extensions.Http.RestClient
 {
     public static class RestClientBuilderExtensions
     {
@@ -13,7 +14,7 @@ namespace Net.Extensions.Http.RestClient.Extensions
             if (string.IsNullOrWhiteSpace(baseUrl))
                 throw new ArgumentException("Base URL cannot be null or empty.", nameof(baseUrl));
 
-            client.BaseUrl = new Uri(baseUrl);
+            client.SetBaseAddress(new Uri(baseUrl));
             return client;
         }
 
@@ -37,7 +38,7 @@ namespace Net.Extensions.Http.RestClient.Extensions
             if (timeout <= TimeSpan.Zero)
                 throw new ArgumentException("Timeout must be greater than zero.", nameof(timeout));
 
-            client.HttpClient.Timeout = timeout;
+            client.SetTimeout(timeout);
             return client;
         }
 
@@ -60,7 +61,5 @@ namespace Net.Extensions.Http.RestClient.Extensions
             client.SetTimeoutPolicy(timeoutPolicy);
             return client;
         }
-
-        // Puedes agregar más métodos para circuit breaker, logging, etc.
     }
 }

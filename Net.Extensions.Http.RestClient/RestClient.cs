@@ -1,11 +1,14 @@
 ﻿using Net.Extensions.Http.RestClient.Interface;
+using Policies;
 using System.Web;
 
 namespace Net.Extensions.Http.RestClient
 {
     public class RestClient : IRestClient
     {
-        private readonly HttpClient _httpClient;
+        private HttpClient _httpClient;
+        private RetryPolicy? _retryPolicy;
+        private TimeoutPolicy? _timeoutPolicy;
 
         public RestClient(HttpClient httpClient)
         {
@@ -14,7 +17,29 @@ namespace Net.Extensions.Http.RestClient
                 throw new ArgumentException("HttpClient.BaseAddress must be set.");
         }
 
+        public RestClient()
+        {
+            _httpClient = new HttpClient();
+        }
+
+        public Uri BaseUrl => _httpClient.BaseAddress!;
         public async Task<RestResponse<T>> SendAsync<T>(RestRequest request)
+        {
+            Func<Task<RestResponse<T>>> action = () => SendRequestInternal<T>(request);
+
+            if (_timeoutPolicy != null)
+            {
+                action = () => _timeoutPolicy.ExecuteAsync(action);
+            }
+
+            if (_retryPolicy != null)
+            {
+                return await _retryPolicy.ExecuteAsync(action);
+            }
+
+            return await action();
+        }
+        private async Task<RestResponse<T>> SendRequestInternal<T>(RestRequest request)
         {
             try
             {
@@ -30,6 +55,8 @@ namespace Net.Extensions.Http.RestClient
                 {
                     foreach (var header in request.Headers)
                     {
+                        if (httpRequest.Headers.Contains(header.Key))
+                            httpRequest.Headers.Remove(header.Key);
                         httpRequest.Headers.Add(header.Key, header.Value);
                     }
                 }
@@ -52,7 +79,38 @@ namespace Net.Extensions.Http.RestClient
                 return new RestResponse<T>(false, 0, default, ex.Message);
             }
         }
+        public void SetAuthHandler(HttpMessageHandler authHandler)
+        {
+            if (authHandler == null)
+                throw new ArgumentNullException(nameof(authHandler));
 
+            var baseAddress = _httpClient.BaseAddress;
+
+            // Crea un nuevo HttpClient con el handler personalizado
+            _httpClient.Dispose();
+            _httpClient = new HttpClient(authHandler)
+            {
+                BaseAddress = baseAddress
+            };
+        }
+        public void SetBaseAddress(Uri baseAddress)
+        {
+            if (baseAddress == null)
+                throw new ArgumentNullException(nameof(baseAddress));
+
+            _httpClient.BaseAddress = baseAddress;
+        }
+        public void SetRetryPolicy(RetryPolicy retryPolicy)
+        {
+            _retryPolicy = retryPolicy ?? throw new ArgumentNullException(nameof(retryPolicy));
+        }
+        public void SetTimeout(TimeSpan timeout)
+        {
+            if (timeout <= TimeSpan.Zero)
+                throw new ArgumentOutOfRangeException(nameof(timeout), "El timeout debe ser mayor que cero.");
+
+            _httpClient.Timeout = timeout;
+        }
         private Uri BuildUri(RestRequest request)
         {
             var baseUri = _httpClient.BaseAddress ?? throw new InvalidOperationException("BaseAddress no está configurada.");
@@ -71,6 +129,9 @@ namespace Net.Extensions.Http.RestClient
 
             return uriBuilder.Uri;
         }
+        public void SetTimeoutPolicy(TimeoutPolicy timeoutPolicy)
+        {
+            _timeoutPolicy = timeoutPolicy ?? throw new ArgumentNullException(nameof(timeoutPolicy));
+        }
     }
-
 }

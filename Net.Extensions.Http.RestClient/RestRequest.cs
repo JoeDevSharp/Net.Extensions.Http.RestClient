@@ -4,14 +4,19 @@
     {
         public string Resource { get; private set; }
         public HttpMethod Method { get; private set; }
-        public object? Body { get; private set; }
-        public Dictionary<string, string>? Headers { get; private set; }
-        public Dictionary<string, string>? QueryParameters { get; private set; }
+        public object? Body { get; set; }
+        public Dictionary<string, string>? Headers { get; set; }
+        public Dictionary<string, string>? QueryParameters { get; set; }
 
         public RestRequest(string resource, HttpMethod method)
         {
-            Resource = resource ?? throw new System.ArgumentNullException(nameof(resource));
-            Method = method ?? throw new System.ArgumentNullException(nameof(method));
+            Resource = resource ?? throw new ArgumentNullException(nameof(resource));
+            Method = method ?? throw new ArgumentNullException(nameof(method));
+        }
+
+        public RestRequest(string resource)
+        {
+            Resource = resource ?? throw new ArgumentNullException(nameof(resource));
         }
 
         public RestRequest AddBody(object body)

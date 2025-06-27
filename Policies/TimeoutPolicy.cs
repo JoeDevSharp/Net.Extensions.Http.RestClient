@@ -1,4 +1,8 @@
-﻿namespace Policies
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Policies
 {
     public class TimeoutPolicy
     {
@@ -14,15 +18,19 @@
         /// Lanza TimeoutException si se supera el tiempo.
         /// </summary>
         /// <param name="action">Función asíncrona a ejecutar</param>
-        public async Task<T> ExecuteAsync<T>(Func<CancellationToken, Task<T>> action)
+        public async Task<T> ExecuteAsync<T>(Func<Task<T>> action)
         {
             using var cts = new CancellationTokenSource(Timeout);
 
-            var task = action(cts.Token);
-            var completedTask = await Task.WhenAny(task, Task.Delay(Timeout, cts.Token));
+            var task = action();
+            var delayTask = Task.Delay(Timeout, cts.Token);
+
+            var completedTask = await Task.WhenAny(task, delayTask);
 
             if (completedTask != task)
                 throw new TimeoutException($"La operación excedió el timeout de {Timeout.TotalSeconds} segundos.");
+
+            cts.Cancel(); // Cancelar delay si la tarea terminó antes
 
             return await task; // Resultado o excepción de la tarea original
         }
