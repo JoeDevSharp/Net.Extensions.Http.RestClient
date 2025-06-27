@@ -1,5 +1,7 @@
 ﻿using Net.Extensions.Http.RestClient;               // Core RestClient class
 using Net.Extensions.Http.RestClient.Extensions;    // Fluent extension methods like WithBaseUrl, AddHeader, etc.
+using Net.Extensions.OAuth2.Providers;
+using Policies;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,8 +21,15 @@ namespace ConsoleAppExemple
         /// </summary>
         private static async Task Send()
         {
+            var provider = new GoogleProvider(
+                "550344567807-kd6kvfomtl9kjr7j4ro1ba8dhgjf02ap.apps.googleusercontent.com",
+                "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",
+                "http://localhost:60000/"
+            );
+
             // STEP 1: Create a new RestClient and configure it with the base URL
             var client = new RestClient()
+                .WithAuthProvider(provider)
                 .WithBaseUrl("https://reqres.in"); // Base address for all requests
 
             // STEP 2: Build a request targeting /api/users?page=1
@@ -56,7 +65,7 @@ namespace ConsoleAppExemple
             else
             {
                 // If the request failed or returned invalid data, print the error
-                Console.WriteLine($"❌ Request failed: {response.Error}");
+                Console.WriteLine($"❌ Request failed: {response.ErrorMessage}");
             }
 
             // Prevent the console window from closing immediately

@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="JoeDevSharp.Net.Extensions.OAuth2" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Net.Extensions.Http.RestClient\Net.Extensions.Http.RestClient.csproj" />
   </ItemGroup>
 

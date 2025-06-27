@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net.Extensions.Http.RestClient", "Net.Extensions.Http.RestClient.csproj", "{781024C4-10A7-401A-B68D-183BDE5B54BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "..\Auth\Auth.csproj", "{15BCC253-1C9F-479B-BDCA-A39812D56FCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstraction", "..\Abstraction\Abstraction.csproj", "{7F644A59-A4DA-4838-B586-494E52AE1987}"
 EndProject
@@ -31,10 +29,6 @@ Global
 		{781024C4-10A7-401A-B68D-183BDE5B54BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{781024C4-10A7-401A-B68D-183BDE5B54BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{781024C4-10A7-401A-B68D-183BDE5B54BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15BCC253-1C9F-479B-BDCA-A39812D56FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15BCC253-1C9F-479B-BDCA-A39812D56FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15BCC253-1C9F-479B-BDCA-A39812D56FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15BCC253-1C9F-479B-BDCA-A39812D56FCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7F644A59-A4DA-4838-B586-494E52AE1987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7F644A59-A4DA-4838-B586-494E52AE1987}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F644A59-A4DA-4838-B586-494E52AE1987}.Release|Any CPU.ActiveCfg = Release|Any CPU

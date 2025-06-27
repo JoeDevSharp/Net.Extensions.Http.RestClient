@@ -1,26 +1,27 @@
-﻿using Auth.Interfaces;
+﻿using Net.Extensions.OAuth2.Abstracts;
 
-namespace Auth
+namespace Net.Extensions.Http.RestClient
 {
     public class AuthProviderHandler : DelegatingHandler
     {
         private readonly IAuthProvider _authProvider;
 
         public AuthProviderHandler(IAuthProvider authProvider)
+            : base(new HttpClientHandler()) 
         {
-            _authProvider = authProvider ?? throw new System.ArgumentNullException(nameof(authProvider));
+            _authProvider = authProvider ?? throw new ArgumentNullException(nameof(authProvider));
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var token = await _authProvider.GetTokenAsync();
+            var authUser = await _authProvider.LoginAsync();
 
-            if (!string.IsNullOrEmpty(token))
+            if (authUser is not null)
             {
                 if (request.Headers.Contains("Authorization"))
                     request.Headers.Remove("Authorization");
 
-                request.Headers.Add("Authorization", $"Bearer {token}");
+                request.Headers.Add("Authorization", $"Bearer {authUser.Id}");
             }
 
             return await base.SendAsync(request, cancellationToken);

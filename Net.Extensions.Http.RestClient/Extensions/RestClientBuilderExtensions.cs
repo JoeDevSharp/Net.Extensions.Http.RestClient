@@ -1,5 +1,4 @@
-﻿using Auth;
-using Auth.Interfaces;
+﻿using Net.Extensions.OAuth2.Abstracts;
 using Policies;
 
 namespace Net.Extensions.Http.RestClient
