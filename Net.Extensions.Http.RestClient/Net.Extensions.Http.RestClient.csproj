@@ -4,10 +4,32 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>JoeDevSharp.$(AssemblyName)</PackageId>
+    <Title>JoeDevSharp.$(AssemblyName)</Title>
+    <Version>1.0.0</Version>
+    <Authors>JoeDevSharp</Authors>
+    <Product>JoeDevSharp.$(AssemblyName)</Product>
+    <Description>Designed to simplify consuming REST APIs by combining powerful abstractions, flexible authentication integration, and a developer-friendly API.</Description>
+    <PackageProjectUrl>https://github.com/JoeDevSharp</PackageProjectUrl>
+    <PackageIcon>JoeDevSharp.Net.Extensions.icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/JoeDevSharp/Net.Extensions.Http.RestClient</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JoeDevSharp.Net.Extensions.Auth.Abstractions" Version="1.0.3" />
+    <None Include="..\..\..\..\iCloudDrive\JoeDev\Logos\JoeDevSharp.Net.Extensions.icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JoeDevSharp.Net.Extensions.Auth.Abstractions" Version="1.0.4" />
   </ItemGroup>
 
 </Project>
