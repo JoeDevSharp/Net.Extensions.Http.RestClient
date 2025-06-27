@@ -21,7 +21,7 @@ namespace Net.Extensions.Http.RestClient
                 if (request.Headers.Contains("Authorization"))
                     request.Headers.Remove("Authorization");
 
-                request.Headers.Add("Authorization", $"Bearer {authUser.Id}");
+                request.Headers.Add("Authorization", $"Bearer {_authProvider.Token}");
             }
 
             return await base.SendAsync(request, cancellationToken);

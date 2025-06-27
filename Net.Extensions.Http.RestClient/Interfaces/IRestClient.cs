@@ -1,4 +1,4 @@
-﻿using Policies;
+﻿using Net.Extensions.Http.RestClient.Policies;
 
 namespace Net.Extensions.Http.RestClient.Interface
 {

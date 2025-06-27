@@ -1,4 +1,4 @@
-﻿using Contracts;
+﻿using Net.Extensions.Http.RestClient.Contracts;
 using System.Text.RegularExpressions;
 
 namespace Net.Extensions.Http.RestClient

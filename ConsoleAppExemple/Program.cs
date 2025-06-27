@@ -1,10 +1,6 @@
 ﻿using Net.Extensions.Http.RestClient;               // Core RestClient class
 using Net.Extensions.Http.RestClient.Extensions;    // Fluent extension methods like WithBaseUrl, AddHeader, etc.
 using Net.Extensions.OAuth2.Providers;
-using Policies;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace ConsoleAppExemple
 {

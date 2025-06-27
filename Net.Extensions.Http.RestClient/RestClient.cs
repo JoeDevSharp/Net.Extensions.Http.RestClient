@@ -1,5 +1,5 @@
 ﻿using Net.Extensions.Http.RestClient.Interface;
-using Policies;
+using Net.Extensions.Http.RestClient.Policies;
 using System.Web;
 
 namespace Net.Extensions.Http.RestClient

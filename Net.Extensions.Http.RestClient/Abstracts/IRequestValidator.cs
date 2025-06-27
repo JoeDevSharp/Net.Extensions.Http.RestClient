@@ -1,6 +1,6 @@
 ﻿namespace Abstraction
 {
-    internal interface ITokenProvider
+    internal class IRequestValidator
     {
     }
 }

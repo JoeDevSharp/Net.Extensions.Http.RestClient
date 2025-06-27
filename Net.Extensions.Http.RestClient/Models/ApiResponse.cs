@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    namespace Net.Extensions.Http.RestClient.Core
+    namespace Net.Extensions.Http.RestClient.Models
     {
         public class ApiResponse<T>
         {

@@ -1,4 +1,4 @@
-﻿namespace Policies
+﻿namespace Net.Extensions.Http.RestClient.Policies
 {
     public class RetryPolicy
     {

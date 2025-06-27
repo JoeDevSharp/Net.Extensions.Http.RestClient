@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace Net.Extensions.Http.RestClient.Models
 {
     public class PaginationMetadata
     {

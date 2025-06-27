@@ -7,13 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JoeDevSharp.Net.Extensions.Auth.Abstractions" Version="1.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Abstraction\Abstraction.csproj" />
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
-    <ProjectReference Include="..\Policies\Policies.csproj" />
+    <PackageReference Include="JoeDevSharp.Net.Extensions.Auth.Abstractions" Version="1.0.3" />
   </ItemGroup>
 
 </Project>

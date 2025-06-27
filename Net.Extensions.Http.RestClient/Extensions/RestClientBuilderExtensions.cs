@@ -1,5 +1,5 @@
-﻿using Net.Extensions.OAuth2.Abstracts;
-using Policies;
+﻿using Net.Extensions.Http.RestClient.Policies;
+using Net.Extensions.OAuth2.Abstracts;
 
 namespace Net.Extensions.Http.RestClient
 {

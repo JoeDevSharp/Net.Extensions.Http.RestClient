@@ -1,4 +1,4 @@
-﻿namespace Contracts
+﻿namespace Net.Extensions.Http.RestClient.Contracts
 {
     public interface IRestClientFactory
     {

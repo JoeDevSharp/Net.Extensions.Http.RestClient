@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Helpers
+namespace Net.Extensions.Http.RestClient.Helpers
 {
     public static class JsonSerializerHelper
     {
