@@ -42,7 +42,7 @@ namespace ConsoleAppExemple
             var response = await client.SendAsync<UserListResponse>(request);
 
             // STEP 4: Check if the response is successful and contains valid data
-            if (response.IsSuccess && response.Data != null)
+            if (response.IsValidate)
             {
                 // Display basic pagination info
                 Console.WriteLine($"📄 Page {response.Data.Page} of {response.Data.TotalPages}");
